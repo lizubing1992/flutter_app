@@ -248,7 +248,7 @@ class _HoPageState extends State<HomePage> {
     //历史事件的点击
     final Widget historyView = new HistoryDateView(
         opacity: _historyOpacity,
-        curentDate: _currentDate,
+        currentDate: _currentDate,
         historyDates: _historyDates,
         onTap: (date) => _historyDateItemTap(date));
     final Widget body = new Stack(children: <Widget>[
