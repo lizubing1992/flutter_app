@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../util/display_util.dart';
 import '../manager/user_manager.dart';
 import '../manager/favorite_manager.dart';
 import '../model/user_info.dart';
@@ -182,8 +183,24 @@ class _HoPageState extends State<HomePage> {
   void _onAccountTap(BuildContext context) async {
     await UserManager.isLogin()
         ? _showBottomSheet(context)
-        : Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => new LoginPage()));
+        : Navigator.push<String>(
+        context,
+        new PageRouteBuilder(pageBuilder: (BuildContext context,
+            Animation<double> animation, Animation<double> secondaryAnimation) {
+          // 跳转的路由对象
+          return new LoginPage();
+        }, transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+            ) {
+          return DisPlayUtil.createTransition(animation, child);
+        }));
+
+
+//    Navigator.of(context)
+//        .push(MaterialPageRoute(builder: (context) => new LoginPage()));
   }
 
   ///展示退出对话框
